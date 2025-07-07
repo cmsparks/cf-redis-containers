@@ -9,7 +9,7 @@
   },
   "containers": [
     {
-      "class_name": "Redis",
+      "class_name": "RedisContainer",
       "image": "./Dockerfile",
       "max_instances": 10,
       "name": "redis-container"
@@ -18,19 +18,17 @@
   "durable_objects": {
     "bindings": [
       {
-        "class_name": "Redis",
-        "name": "Redis"
+        "class_name": "RedisContainer",
+        "name": "RedisContainer"
       }
     ]
   },
   "migrations": [
     {
-      "new_sqlite_classes": ["Redis"],
+      "new_sqlite_classes": ["RedisContainer"],
       "tag": "v1"
     }
   ],
   "vars": {
-    "CLOUDFLARE_TUNNEL_TOKEN": "placeholder",
-    "REDIS_HOST": "placeholder",
   }
 }

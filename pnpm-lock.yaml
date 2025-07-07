@@ -14,10 +14,10 @@ importers:
       hono:
         specifier: 4.8.2
         version: 4.8.2
-      redis:
-        specifier: ^5.5.6
-        version: 5.5.6
     devDependencies:
+      '@types/node':
+        specifier: ^24.0.10
+        version: 24.0.10
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -349,33 +349,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@redis/bloom@5.5.6':
-    resolution: {integrity: sha512-bNR3mxkwtfuCxNOzfV8B3R5zA1LiN57EH6zK4jVBIgzMzliNuReZXBFGnXvsi80/SYohajn78YdpYI+XNpqL+A==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      '@redis/client': ^5.5.6
-
-  '@redis/client@5.5.6':
-    resolution: {integrity: sha512-M3Svdwt6oSfyfQdqEr0L2HOJH2vK7GgCFx1NfAQvpWAT4+ljoT1L5S5cKT3dA9NJrxrOPDkdoTPWJnIrGCOcmw==}
-    engines: {node: '>= 18'}
-
-  '@redis/json@5.5.6':
-    resolution: {integrity: sha512-AIsoe3SsGQagqAmSQHaqxEinm5oCWr7zxPWL90kKaEdLJ+zw8KBznf2i9oK0WUFP5pFssSQUXqnscQKe2amfDQ==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      '@redis/client': ^5.5.6
-
-  '@redis/search@5.5.6':
-    resolution: {integrity: sha512-JSqasYqO0mVcHL7oxvbySRBBZYRYhFl3W7f0Da7BW8M/r0Z9wCiVrdjnN4/mKBpWZkoJT/iuisLUdPGhpKxBew==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      '@redis/client': ^5.5.6
-
-  '@redis/time-series@5.5.6':
-    resolution: {integrity: sha512-jkpcgq3NOI3TX7xEAJ3JgesJTxAx7k0m6lNxNsYdEM8KOl+xj7GaB/0CbLkoricZDmFSEAz7ClA1iK9XkGHf+Q==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      '@redis/client': ^5.5.6
+  '@types/node@24.0.10':
+    resolution: {integrity: sha512-ENHwaH+JIRTDIEEbDK6QSQntAYGtbvdDXnMXnZaZ6k13Du1dPMmprkEHIL7ok2Wl2aZevetwTAb5S+7yIF+enA==}
 
   acorn-walk@8.3.2:
     resolution: {integrity: sha512-cjkyv4OtNCIeqhHrfS81QWXoCBPExR/J62oyEqepVw8WaQeSqpW2uhuLPh1m9eWhDuOo/jUXVTlifvesOWp/4A==}
@@ -391,10 +366,6 @@ packages:
 
   blake3-wasm@2.1.5:
     resolution: {integrity: sha512-F1+K8EbfOZE49dtoPtmxUQrpXaBIl3ICvasLh+nJta0xkz+9kF/7uet9fLnwKqhDrmj6g+6K3Tw9yQPUg2ka5g==}
-
-  cluster-key-slot@1.1.2:
-    resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}
-    engines: {node: '>=0.10.0'}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -480,10 +451,6 @@ packages:
   printable-characters@1.0.42:
     resolution: {integrity: sha512-dKp+C4iXWK4vVYZmYSd0KBH5F/h1HoZRsbJ82AVKRO3PEo8L4lBS/vLwhVtpwwuYcoIsVY+1JYKR268yn480uQ==}
 
-  redis@5.5.6:
-    resolution: {integrity: sha512-hbpqBfcuhWHOS9YLNcXcJ4akNr7HFX61Dq3JuFZ9S7uU7C7kvnzuH2PDIXOP62A3eevvACoG8UacuXP3N07xdg==}
-    engines: {node: '>= 18'}
-
   semver@7.7.2:
     resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
     engines: {node: '>=10'}
@@ -517,6 +484,9 @@ packages:
 
   ufo@1.6.1:
     resolution: {integrity: sha512-9a4/uxlTWJ4+a5i0ooc1rU7C7YOw3wT+UGqdeNNHWnOF9qcMBgLRS+4IYUqbczewFx4mLEig6gawh7X6mFlEkA==}
+
+  undici-types@7.8.0:
+    resolution: {integrity: sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==}
 
   undici@5.29.0:
     resolution: {integrity: sha512-raqeBD6NQK4SkWhQzeYKd1KmIG6dllBOTt55Rmkt4HtI9mwdWtJljnrXjAFUBLTSN67HWrOIZ3EPF4kjUw80Bg==}
@@ -757,25 +727,9 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.3
 
-  '@redis/bloom@5.5.6(@redis/client@5.5.6)':
+  '@types/node@24.0.10':
     dependencies:
-      '@redis/client': 5.5.6
-
-  '@redis/client@5.5.6':
-    dependencies:
-      cluster-key-slot: 1.1.2
-
-  '@redis/json@5.5.6(@redis/client@5.5.6)':
-    dependencies:
-      '@redis/client': 5.5.6
-
-  '@redis/search@5.5.6(@redis/client@5.5.6)':
-    dependencies:
-      '@redis/client': 5.5.6
-
-  '@redis/time-series@5.5.6(@redis/client@5.5.6)':
-    dependencies:
-      '@redis/client': 5.5.6
+      undici-types: 7.8.0
 
   acorn-walk@8.3.2: {}
 
@@ -786,8 +740,6 @@ snapshots:
       printable-characters: 1.0.42
 
   blake3-wasm@2.1.5: {}
-
-  cluster-key-slot@1.1.2: {}
 
   color-convert@2.0.1:
     dependencies:
@@ -889,14 +841,6 @@ snapshots:
 
   printable-characters@1.0.42: {}
 
-  redis@5.5.6:
-    dependencies:
-      '@redis/bloom': 5.5.6(@redis/client@5.5.6)
-      '@redis/client': 5.5.6
-      '@redis/json': 5.5.6(@redis/client@5.5.6)
-      '@redis/search': 5.5.6(@redis/client@5.5.6)
-      '@redis/time-series': 5.5.6(@redis/client@5.5.6)
-
   semver@7.7.2: {}
 
   sharp@0.33.5:
@@ -944,6 +888,8 @@ snapshots:
   typescript@5.8.3: {}
 
   ufo@1.6.1: {}
+
+  undici-types@7.8.0: {}
 
   undici@5.29.0:
     dependencies:
