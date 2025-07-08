@@ -11,12 +11,14 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
+    "esbuild": "^0.25.6",
     "typescript": "5.8.3",
-    "wrangler": "4.21.x"
+    "wrangler": "4.21.2"
   },
   "dependencies": {
     "@cloudflare/containers": "0.0.13",
-    "hono": "4.8.2"
+    "hono": "4.8.2",
+    "redis": "4"
   },
   "cloudflare": {
     "label": "Containers Starter",

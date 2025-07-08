@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redis Counter Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+    .endpoint { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+    button { padding: 10px 15px; margin: 5px; background: #007cba; color: white; border: none; border-radius: 3px; cursor: pointer; }
+    button:hover { background: #005a87; }
+    button:disabled { background: #ccc; cursor: not-allowed; }
+    input { padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 3px; }
+    .result { margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 3px; min-height: 20px; }
+    .timing { font-size: 0.9em; color: #666; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Redis Counter Demo</h1>
+  
+  <div class="endpoint">
+    <h3>Redis Shard Selection</h3>
+    <input type="text" id="shard-id" placeholder="Enter shard ID" value="default-shard">
+  </div>
+  
+  <div class="endpoint">
+    <h3>Ping Redis</h3>
+    <button id="ping-btn" onclick="pingRedis()">Ping</button>
+    <div id="ping-result" class="result"></div>
+    <div id="ping-timing" class="timing"></div>
+  </div>
+  
+  <div class="endpoint">
+    <h3>Counter Operations</h3>
+    <input type="text" id="counter-id" placeholder="Enter counter ID" value="test-counter">
+    <br>
+    <button id="get-btn" onclick="getCounter()">Get Counter</button>
+    <button id="incr-btn" onclick="incrementCounter()">Increment Counter</button>
+    <div id="counter-result" class="result"></div>
+    <div id="counter-timing" class="timing"></div>
+  </div>
+  
+  <script>
+    function setButtonState(buttonId, disabled) {
+      const button = document.getElementById(buttonId);
+      button.disabled = disabled;
+    }
+
+    function showTiming(timingElementId, duration, operation) {
+      const timingElement = document.getElementById(timingElementId);
+      timingElement.textContent = `${operation} took ${duration}ms`;
+    }
+
+    async function pingRedis() {
+      const shardId = document.getElementById('shard-id').value;
+      const result = document.getElementById('ping-result');
+      const timing = document.getElementById('ping-timing');
+      
+      // Show loading immediately and disable button
+      result.textContent = 'Loading...';
+      result.style.color = 'gray';
+      timing.textContent = '';
+      setButtonState('ping-btn', true);
+      
+      if (!shardId) {
+        result.textContent = 'Please enter a shard ID';
+        result.style.color = 'orange';
+        setButtonState('ping-btn', false);
+        return;
+      }
+
+      const startTime = performance.now();
+      
+      try {
+        const response = await fetch('/' + encodeURIComponent(shardId) + '/ping');
+        const text = await response.text();
+        const endTime = performance.now();
+        const duration = Math.round((endTime - startTime) * 100) / 100;
+        
+        result.textContent = 'Ping result: ' + text;
+        result.style.color = 'green';
+        showTiming('ping-timing', duration, 'Ping operation');
+      } catch (error) {
+        const endTime = performance.now();
+        const duration = Math.round((endTime - startTime) * 100) / 100;
+        
+        result.textContent = 'Error: ' + error.message;
+        result.style.color = 'red';
+        showTiming('ping-timing', duration, 'Failed ping operation');
+      } finally {
+        setButtonState('ping-btn', false);
+      }
+    }
+    
+    async function getCounter() {
+      const shardId = document.getElementById('shard-id').value;
+      const id = document.getElementById('counter-id').value;
+      const result = document.getElementById('counter-result');
+      const timing = document.getElementById('counter-timing');
+      
+      // Show loading immediately and disable button
+      result.textContent = 'Loading...';
+      result.style.color = 'gray';
+      timing.textContent = '';
+      setButtonState('get-btn', true);
+      
+      if (!shardId) {
+        result.textContent = 'Please enter a shard ID';
+        result.style.color = 'orange';
+        setButtonState('get-btn', false);
+        return;
+      }
+      if (!id) {
+        result.textContent = 'Please enter a counter ID';
+        result.style.color = 'orange';
+        setButtonState('get-btn', false);
+        return;
+      }
+
+      const startTime = performance.now();
+      
+      try {
+        const response = await fetch('/' + encodeURIComponent(shardId) + '/' + encodeURIComponent(id) + '/counter');
+        const text = await response.text();
+        const endTime = performance.now();
+        const duration = Math.round((endTime - startTime) * 100) / 100;
+        
+        result.textContent = 'Counter value: ' + text;
+        result.style.color = 'blue';
+        showTiming('counter-timing', duration, 'Get counter operation');
+      } catch (error) {
+        const endTime = performance.now();
+        const duration = Math.round((endTime - startTime) * 100) / 100;
+        
+        result.textContent = 'Error: ' + error.message;
+        result.style.color = 'red';
+        showTiming('counter-timing', duration, 'Failed get counter operation');
+      } finally {
+        setButtonState('get-btn', false);
+      }
+    }
+    
+    async function incrementCounter() {
+      const shardId = document.getElementById('shard-id').value;
+      const id = document.getElementById('counter-id').value;
+      const result = document.getElementById('counter-result');
+      const timing = document.getElementById('counter-timing');
+      
+      // Show loading immediately and disable button
+      result.textContent = 'Loading...';
+      result.style.color = 'gray';
+      timing.textContent = '';
+      setButtonState('incr-btn', true);
+      
+      if (!shardId) {
+        result.textContent = 'Please enter a shard ID';
+        result.style.color = 'orange';
+        setButtonState('incr-btn', false);
+        return;
+      }
+      if (!id) {
+        result.textContent = 'Please enter a counter ID';
+        result.style.color = 'orange';
+        setButtonState('incr-btn', false);
+        return;
+      }
+
+      const startTime = performance.now();
+      
+      try {
+        const response = await fetch('/' + encodeURIComponent(shardId) + '/' + encodeURIComponent(id) + '/counter', {
+          method: 'POST'
+        });
+        const text = await response.text();
+        const endTime = performance.now();
+        const duration = Math.round((endTime - startTime) * 100) / 100;
+        
+        result.textContent = 'New counter value: ' + text;
+        result.style.color = 'green';
+        showTiming('counter-timing', duration, 'Increment counter operation');
+      } catch (error) {
+        const endTime = performance.now();
+        const duration = Math.round((endTime - startTime) * 100) / 100;
+        
+        result.textContent = 'Error: ' + error.message;
+        result.style.color = 'red';
+        showTiming('counter-timing', duration, 'Failed increment counter operation');
+      } finally {
+        setButtonState('incr-btn', false);
+      }
+    }
+  </script>
+</body>
+</html>
